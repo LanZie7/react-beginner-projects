@@ -9,6 +9,9 @@ function App() {
 
   const [ users, setUsers ] = React.useState([])
   const [ isLoading, setLoading ] = React.useState(true)
+  const [ searchValue, setSearchValue ] = React.useState('')
+  const [ invitedUsers, setInvitedUsers ] = React.useState([])
+  const [ success, setSuccess ] = React.useState(false)
 
   // При первом рендере отправляем запрос на бэкенд (используем fetch)
   React.useEffect(() => {
@@ -22,11 +25,38 @@ function App() {
     }).finally(() => setLoading(false))
   }, [])
 
+  const onChangeSearchValue = (event) => {
+    setSearchValue(event.target.value)
+  }
+
+  const onClickInvite = (id) => {
+    if (invitedUsers.includes(id)) {
+      setInvitedUsers(prev => prev.filter(_id => _id !== id))
+    } else {
+      setInvitedUsers(prev => [...prev, id])
+    }
+  }
+
+  const onClickSendInvitation = () => {
+    setSuccess(true)
+  }
+
 
   return (
     <div className="App">
-      <Users items={users} isLoading={isLoading} />
-      {/* <Success /> */}
+      {success ? (
+        <Success count={invitedUsers.length} />
+      ) : (
+        <Users
+          onChangeSearchValue={onChangeSearchValue}
+          searchValue={searchValue}
+          items={users}
+          isLoading={isLoading}
+          invitedUsers={invitedUsers}
+          onClickInvite={onClickInvite}
+          onClickSendInvitation={onClickSendInvitation}
+        />
+      )}
     </div>
   );
 }
