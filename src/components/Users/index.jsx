@@ -56,7 +56,8 @@ export const Users = ({
       {invitedUsers.length > 0 && (
           <button 
             onClick={onClickSendInvitation} 
-            className="send-invite-btn">
+            className="send-invite-btn"
+          >
             Отправить приглашение
           </button>
         )
