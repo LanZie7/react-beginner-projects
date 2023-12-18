@@ -8,7 +8,8 @@ export const Users = ({
   searchValue, 
   onChangeSearchValue, 
   invitedUsers, 
-  onClickInvite 
+  onClickInvite,
+  onClickSendInvitation
 }) => {
   return (
     <>
@@ -52,7 +53,7 @@ export const Users = ({
           }
         </ul>
       )}
-      <button className="send-invite-btn">Отправить приглашение</button>
+      <button onClick={onClickSendInvitation} className="send-invite-btn">Отправить приглашение</button>
     </>
   );
 };
