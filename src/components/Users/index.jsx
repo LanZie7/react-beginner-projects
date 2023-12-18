@@ -2,7 +2,14 @@ import React from 'react';
 import { Skeleton } from './Skeleton';
 import { User } from './User';
 
-export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
+export const Users = ({ 
+  items, 
+  isLoading, 
+  searchValue, 
+  onChangeSearchValue, 
+  invitedUsers, 
+  onClickInvite 
+}) => {
   return (
     <>
       <div className="search">
@@ -38,7 +45,7 @@ export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) =>
               // return true
 
             }).map((obj) => (
-              <User key={obj.id}
+              <User onClickInvite={onClickInvite} isInvited={invitedUsers.includes(obj.id)} key={obj.id}
                 {...obj}
               />
             ))
